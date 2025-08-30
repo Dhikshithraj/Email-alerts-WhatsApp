@@ -1,3 +1,4 @@
+import html
 import streamlit as st
 import pandas as pd
 import time
@@ -246,9 +247,9 @@ for email in sample_emails:
         with st.container():
             st.markdown(f"""
             <div class="email-card">
-                <b>{email['sender']}</b>
-                <p style="margin: 0.2rem 0; font-weight: bold;">{email['subject']}</p>
-                <p style="margin: 0.2rem 0; color: #555;">{email['preview']}</p>
+                <b>{html.escape(email['sender'])}</b>
+                <p style="margin: 0.2rem 0; font-weight: bold;">{html.escape(email['subject'])}</p>
+                <p style="margin: 0.2rem 0; color: #555;">{html.escape(email['preview'])}</p>
                 <p style="margin: 0; font-size: 0.8rem; color: #777;">{email['time']} • {email['category']}</p>
             </div>
             """, unsafe_allow_html=True)
@@ -344,4 +345,5 @@ st.divider()
 st.caption("""
 This is a demonstration of the Email Alerts on WhatsApp project. 
 The actual implementation uses Twilio's WhatsApp API and IMAP email protocols but cannot be fully shown in this public demo for security reasons.
+
 """)
